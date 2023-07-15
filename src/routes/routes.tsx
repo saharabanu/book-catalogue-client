@@ -38,11 +38,11 @@ import AddNewBook from "../pages/AddNewBook";
         element: <AddNewBook />,
       },
     {
-        path: '/login',
+        path: '/sign-in',
         element: <Login />,
       },
       {
-        path: '/signup',
+        path: '/sign-up',
         element: <SignUp />,
       },
       {
