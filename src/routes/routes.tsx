@@ -26,17 +26,18 @@ import AddNewBook from "../pages/AddNewBook";
             path: '/book-details/:id',
             element: <BookDetails />,
           },
+          {
+            path: '/all-books',
+            element: <AllBooks />,
+          },
+        {
+            path: '/add-book',
+            element: <AddNewBook />,
+          },
           
       ]
     },
-    {
-        path: '/all-books',
-        element: <AllBooks />,
-      },
-    {
-        path: '/add-book',
-        element: <AddNewBook />,
-      },
+    
     {
         path: '/sign-in',
         element: <Login />,
