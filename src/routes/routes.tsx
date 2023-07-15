@@ -4,7 +4,7 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/Login/SignUp";
 import { NotFound } from "../pages/NotFound";
 import Home from "../pages/Home";
-import Books from "../ui/books";
+import Books from "../ui/Books";
 import BookDetails from "../pages/BookDetails";
 import AllBooks from "../pages/AllBooks";
 import AddNewBook from "../pages/AddNewBook";
