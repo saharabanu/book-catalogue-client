@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import MainLayout from './layouts/MainLayout';
 function App() {
   
   return (
     <>
-      <h1>gghgjhjhk</h1>
+      <MainLayout/>
     </>
   )
 }
