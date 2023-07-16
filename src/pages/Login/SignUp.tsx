@@ -4,16 +4,15 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import Header from "../../layouts/Header"
 import Footer from "../../layouts/Footer"
 
-enum GenderEnum {
-  female = "female",
-  male = "male",
-  other = "other",
-}
+
 
 
 interface IFormInput {
-  firstName: String
-  gender: GenderEnum
+  name: String,
+  email:string,
+  password: string
+
+ 
 }
 
 const SignUp = () => {
@@ -24,13 +23,16 @@ const SignUp = () => {
     <Header/>
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>First Name</label>
-      <input {...register("firstName")} />
-      <label>Gender Selection</label>
-      <select {...register("gender")}>
-        <option value="female">female</option>
-        <option value="male">male</option>
-        <option value="other">other</option>
-      </select>
+      <input {...register("name")} />
+      <br /><br />
+      <label>Email</label>
+      
+      <input {...register("email")} />
+      <br /><br />
+      <label>Password</label>
+      <input {...register("password")} />
+      
+      
       <input type="submit" />
     </form>
     <Footer/>
