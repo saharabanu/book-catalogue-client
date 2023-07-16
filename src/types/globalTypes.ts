@@ -4,4 +4,6 @@ export type IBook = {
     author: string;
     genre:string
     publicationDate:string
+    reviews: string[] |[],
+    status?:boolean
     };

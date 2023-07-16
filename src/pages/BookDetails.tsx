@@ -1,18 +1,34 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import { useParams } from "react-router-dom"
-import { useGetSingleBookQuery } from "../redux/api/apiSlice";
-import { IBook } from "../types/globalTypes";
+import { useNavigate, useParams } from "react-router-dom"
 import Spinner from 'react-bootstrap/Spinner'
+import { useDeleteBookMutation, useGetSingleBookQuery } from "../redux/features/book/booksApi";
+import { Table, Toast } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 
 const BookDetails = () => {
   const {id} = useParams();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   
-
+  
   const {data, isLoading, isError} = useGetSingleBookQuery(id);
+  
+  const [deleteBook, response] = useDeleteBookMutation();
+
+
+  const handleDelete = (_id: any) =>{
+   deleteBook(_id)
+   
+ }
+  
+// single book get
+  
   let content = null;
 
     if (isLoading) {
@@ -32,25 +48,60 @@ const BookDetails = () => {
     }
 
     if (!isLoading && !isError && data?.data) {
-        content = <div>
-          <h2>{data?.data?.title}</h2>
-          <h2>{data?.data?.author}</h2>
-          <h2>{data?.data?.genre}</h2>
-          <h2>{data?.data?.publicationDate}</h2>
-        </div>;
+        content = <>
+        
+        <tbody >
+          <tr>
+            <td>{data?.data?.title}</td>
+            <td>{data?.data?.author}</td>
+            <td>{data?.data?.genre}</td>
+            <td>{data?.data?.publicationDate}</td>
+            <td><button onClick={()=>handleDelete(data?.data?._id)} type="button" className="btn btn-danger">Delete</button></td>
+            <td><button type="button" className="btn btn-warning">Edit</button></td>
+            
+            
+
+            
+          </tr>
+          </tbody>
+      
+       
+        
+        
+        
+        
+        
+         
+          
+        </>;
     }
 
 
 
+    // delete book 
+
+    
 
 
 
   return (
-   <>
-   <div>
+   
+    <Table responsive   className="container mt-5 border">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+          <th>Publication Date</th>
+          <th>Edit</th>
+          <th>Delete</th>
+          
+        </tr>
+      </thead>
     {content}
-   </div>
-   </>
+    </Table>
+   
+  
   )
 }
 

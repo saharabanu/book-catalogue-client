@@ -3,9 +3,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Table } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import { useGetBooksQuery } from "../redux/api/apiSlice";
+
 import { IBook } from "../types/globalTypes";
 import Spinner from 'react-bootstrap/Spinner'
+import { useGetBooksQuery } from "../redux/features/book/booksApi";
 
 
 const Books = () => {
