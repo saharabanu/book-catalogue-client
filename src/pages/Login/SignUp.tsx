@@ -2,40 +2,55 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm, SubmitHandler } from "react-hook-form"
 import Header from "../../layouts/Header"
-import Footer from "../../layouts/Footer"
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hooks";
+import { createUser } from "../../redux/features/user/userSlice";
 
-
-
-
-interface IFormInput {
-  name: String,
+interface IUser {
   email:string,
-  password: string
-
- 
+  password:string
 }
 
+
+
 const SignUp = () => {
-  const { register, handleSubmit } = useForm<IFormInput>()
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data)
+  const { register, handleSubmit } = useForm<IUser>();
+  
+  const navigate = useNavigate()
+  const dispatch =  useAppDispatch()
+  
+const onSubmit = (user:IUser) =>{
+
+  //console.log(user)
+  dispatch(createUser(user))
+  .then(() => {
+    navigate('/');
+  })
+  .catch((error) => {
+    console.error('Login error:', error);
+  });
+
+}
+ 
   return (
     <>
     <Header/>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label>First Name</label>
-      <input {...register("name")} />
-      <br /><br />
+      
       <label>Email</label>
       
-      <input {...register("email")} />
+      <input {...register("email")} type="email" required placeholder="type Email"/>
       <br /><br />
       <label>Password</label>
-      <input {...register("password")} />
+      <input {...register("password")} type="number" placeholder="enter password"/>
       
       
       <input type="submit" />
     </form>
-    <Footer/>
+    <div>
+      <p> Already Registered? Please <Link to="/sign-in">LogIn</Link></p>
+    </div>
+    
     </>
   )
 }
