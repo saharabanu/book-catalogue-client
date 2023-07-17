@@ -49,4 +49,38 @@ const [bookInfo, setBookInfo] = useState({
         //   else{
         //     toast.error('something went wrong')
         //   }
+
+
+        if (!isLoading && !isError && data?.data?.length > 0) {
+        content = data?.data?.map((book:IBook) =>(<tbody key={book.title}>
+          <tr>
+            <td>{book.title}</td>
+            <td>{book.author}</td>
+            <td>{book.genre}</td>
+            <td>{book.publicationDate}</td>
+            <td><Link to={`/book-details/${book._id}`}>Details</Link></td>
+            <td><Link to="/add-book">ADD NEW BOOK</Link></td>
+          </tr>
+          </tbody>));
+    }
+
+
+
+    let content = null;
+
+    if (isLoading) {
+        content = (
+            <>
+              <Spinner animation="border" variant="danger" />
+            </>
+        );
+    }
+
+    if (!isLoading && isError) {
+        content = 'Something is wrong';
+    }
+
+    if (!isLoading && !isError && data?.data?.length === 0) {
+        content = "No Books found!" ;
+    }
 */

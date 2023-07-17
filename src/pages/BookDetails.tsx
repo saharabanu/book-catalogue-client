@@ -77,30 +77,10 @@ const handleCommentSubmit = (e:any) => {
             <td>{data?.data?.publicationDate}</td>
             <td><button onClick={()=>handleDelete(data?.data?._id)} type="button" className="btn btn-danger">Delete</button></td>
             <td><button type="button" className="btn btn-warning"><Link to={`/edit-book/${data?.data?._id}`}>Edit</Link></button></td>
-            
-            
-
-            
           </tr>
-          </tbody>
-      
-       
-        
-        
-        
-        
-        
-         
-          
+          </tbody>  
         </>;
     }
-
-
-
-    // delete book 
-
-    
-
 
 
   return (

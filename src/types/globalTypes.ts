@@ -1,11 +1,11 @@
 export type IBook = {
-    _id:string;
-    title:string;
-    author: string;
-    genre:string
-    publicationDate:string
-    reviews: string[] |[],
-    status?:boolean
+  userEmail?: string | null;
+  _id?: string |undefined;
+  title: string;
+  author: string;
+  genre: string;
+  publicationDate: string;
+  reviews: [];
     };
 
     export type FormValues = {

@@ -7,8 +7,8 @@ const booksApi = api.injectEndpoints({
     endpoints: (builder) => ({
         //gel all books
         getBooks: builder.query({
-          query: () => "/books",
-          providesTags: ['books','reviews','editBook','addBook']
+          query: (params) => `/books${params ? `?${params}` : ""}`,
+          providesTags: ['books','reviews','editBook','addBook', "deleteBook"]
           
         }),
         // get single book
