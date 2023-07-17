@@ -48,8 +48,25 @@ const booksApi = api.injectEndpoints({
             }),
             invalidatesTags: ['editBook'],
           }),
+
+          // post reviews 
+
+          postComment: builder.mutation({
+            query: ({ id, data }) => ({
+              url: `/books/comment/${id}`,
+              method: "POST",
+              body: data,
+            }),
+            invalidatesTags: ["reviews"],
+          }),
+
+          // get review 
+          getComment: builder.query({
+            query: (id) => `/books/comment/${id}`,
+            providesTags: ["reviews"],
+          }),
     
       }),
 })
 
-export const {useAddBookMutation,useGetSingleBookQuery, useDeleteBookMutation, useEditBookMutation,useGetBooksQuery} = booksApi
+export const {useAddBookMutation,useGetSingleBookQuery, useDeleteBookMutation, useEditBookMutation,useGetBooksQuery, usePostCommentMutation} = booksApi

@@ -4,30 +4,43 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
+import React, { useState, ChangeEvent } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import Spinner from 'react-bootstrap/Spinner'
-import { useDeleteBookMutation,  useGetSingleBookQuery } from "../redux/features/book/booksApi";
+import { useDeleteBookMutation,  useGetSingleBookQuery, usePostCommentMutation } from "../redux/features/book/booksApi";
 import { Table, Toast } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 
 const BookDetails = () => {
   const {id} = useParams();
+  const [comment, setComment] = useState("");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  
-  
+  const [postComment, options] = usePostCommentMutation();
   const {data, isLoading, isError} = useGetSingleBookQuery(id);
-  
   const [deleteBook, response] = useDeleteBookMutation();
-
-
-
+// handle delete book
   const handleDelete = (_id: any) =>{
    deleteBook(_id)
    
  }
+ // handle comment
+
+ const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  setComment(e.target.value);
+};
+
+const handleCommentSubmit = (e:any) => {
+  e.preventDefault()
+  const options = {
+    id: id,
+    data: { reviews: comment },
+  };
+  console.log(data)
+  postComment(options);
+  setComment("");
+};
   
 // single book get
   
@@ -67,7 +80,7 @@ const BookDetails = () => {
           </tr>
           </tbody>
       
-       {/* {`/edit-book/${data?.data?._id}`} */}
+       
         
         
         
@@ -87,7 +100,7 @@ const BookDetails = () => {
 
 
   return (
-   
+   <>
     <Table responsive   className="container mt-5 border">
       <thead>
         <tr>
@@ -102,8 +115,15 @@ const BookDetails = () => {
       </thead>
     {content}
     </Table>
+    <div>
+      <form onSubmit={handleCommentSubmit}>
+      <textarea  value={comment} onChange={handleCommentChange}/>
+
+      <input type="submit" />
+      </form>
+    </div>
    
-  
+    </>
   )
 }
 

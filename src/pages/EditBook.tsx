@@ -30,10 +30,10 @@ const onSubmit = async (formData:FormValues) => {
     };
 
     await editBook(updatedBookData);
-    console.log('Book updated successfully!');
+    toast.success("Book updated successfully");
     navigate(`/book-details/${id}`); 
   } catch (error) {
-    console.error('Failed to update book:', error);
+    toast.error(`${error}`);
   }
 };
 
