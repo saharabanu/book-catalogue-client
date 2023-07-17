@@ -29,7 +29,7 @@ interface IFormInput {
 
 const AddNewBook = () => {
   const navigate =  useNavigate()
-  const { register, handleSubmit, reset } = useForm<IFormInput>()
+  const { register, handleSubmit } = useForm<IFormInput>()
   
   const [addBook] = useAddBookMutation()
  

@@ -8,7 +8,6 @@ import { Table } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 import { IBook } from "../types/globalTypes";
-import Spinner from 'react-bootstrap/Spinner'
 import { useGetBooksQuery } from "../redux/features/book/booksApi";
 import { toast } from 'react-toastify';
 

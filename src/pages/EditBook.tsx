@@ -17,7 +17,7 @@ import { FormValues } from "../types/globalTypes";
 const EditBook = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { register,handleSubmit , reset } = useForm<FormValues>();
+  const { register,handleSubmit } = useForm<FormValues>();
   const {data} = useGetSingleBookQuery(id);
   const [editBook] = useEditBookMutation();
 

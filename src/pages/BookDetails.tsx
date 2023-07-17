@@ -4,26 +4,25 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useState, ChangeEvent } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useState, ChangeEvent } from "react";
+import { Link, useParams } from "react-router-dom"
 import Spinner from 'react-bootstrap/Spinner'
 import { useDeleteBookMutation,  useGetCommentQuery,  useGetSingleBookQuery, usePostCommentMutation } from "../redux/features/book/booksApi";
-import { Table, Toast } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Table } from "react-bootstrap";
+
 
 
 const BookDetails = () => {
   const {id} = useParams();
   const [comment, setComment] = useState("");
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { data: reviewList, refetch } = useGetCommentQuery(id, {
+  
+  const { data: reviewList} = useGetCommentQuery(id, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
-  const [postComment, options] = usePostCommentMutation();
+  const [postComment] = usePostCommentMutation();
   const {data, isLoading, isError} = useGetSingleBookQuery(id);
-  const [deleteBook, response] = useDeleteBookMutation();
+  const [deleteBook] = useDeleteBookMutation();
 // handle delete book
   const handleDelete = (_id: any) =>{
    deleteBook(_id)

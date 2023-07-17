@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import Header from "../../layouts/Header"
 import { Link, useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../../redux/hooks"

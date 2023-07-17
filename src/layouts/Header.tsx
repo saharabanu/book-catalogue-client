@@ -6,7 +6,6 @@ import { signOut } from 'firebase/auth';
 import { setUser } from '../redux/features/user/userSlice';
 import { auth } from '../libs/firebase';
 
-
 const Header = () => {
   const {user}   = useAppSelector(state=>state.user)
   const dispatch =  useAppDispatch()
@@ -15,7 +14,7 @@ const Header = () => {
       // Sign-out successful.
 dispatch(setUser(null))
     }).catch((error) => {
-      // An error happened.
+      console.log(error)
     })
   }
   return (
