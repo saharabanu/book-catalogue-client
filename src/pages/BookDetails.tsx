@@ -7,7 +7,7 @@
 import React, { useState, ChangeEvent } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import Spinner from 'react-bootstrap/Spinner'
-import { useDeleteBookMutation,  useGetSingleBookQuery, usePostCommentMutation } from "../redux/features/book/booksApi";
+import { useDeleteBookMutation,  useGetCommentQuery,  useGetSingleBookQuery, usePostCommentMutation } from "../redux/features/book/booksApi";
 import { Table, Toast } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
@@ -17,6 +17,10 @@ const BookDetails = () => {
   const [comment, setComment] = useState("");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { data: reviewList, refetch } = useGetCommentQuery(id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
   const [postComment, options] = usePostCommentMutation();
   const {data, isLoading, isError} = useGetSingleBookQuery(id);
   const [deleteBook, response] = useDeleteBookMutation();
@@ -121,6 +125,20 @@ const handleCommentSubmit = (e:any) => {
 
       <input type="submit" />
       </form>
+    </div>
+
+    <div>
+    {reviewList?.data?.reviews.length > 0 ? (
+              <ul className="list-disc list-inside">
+                {reviewList?.data?.reviews.map(
+                  (review: string, index: number) => (
+                    <li key={index}>{review}</li>
+                  )
+                )}
+              </ul>
+            ) : (
+              <p>No reviews yet.</p>
+            )}
     </div>
    
     </>
