@@ -7,6 +7,15 @@ export type IBook = {
   publicationDate: string;
   reviews: [];
     };
+  export interface BookData {
+      userEmail?: string | null;
+      _id?: string;
+      title: string;
+      author: string;
+      genre: string;
+      publicationDate: string;
+      reviews?: string[];
+    }
 
     export type FormValues = {
         title: string;
@@ -14,3 +23,15 @@ export type IBook = {
         genre: string;
         publicationDate: string;
       };
+
+
+      export interface ReadData {
+        userEmail?: string | null;
+        readingStatus?: boolean | null;
+        _id?: string;
+        title: string;
+        author: string;
+        genre: string;
+        publicationDate: string;
+        reviews?: string[];
+      }

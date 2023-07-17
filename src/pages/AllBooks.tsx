@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { IBook } from "../types/globalTypes";
 import { useGetBooksQuery } from "../redux/features/book/booksApi";
 import { toast } from 'react-toastify';
+import BookCard from "../components/BookCard";
 
 const AllBooks = () => {
   // for searching and filtering
@@ -144,20 +145,13 @@ const genreOptions: string[] = Array.from(
           <th>Author</th>
           <th>Genre</th>
           <th>Publication Date</th>
+          <th>Wishlist</th>
+          <th>Reading</th>
           <th>View</th>
           <th>AddBook</th>
         </tr>
       </thead>
-      {filteredBooks?.map((book:IBook)=> (<tbody key={book.title}>
-          <tr>
-            <td>{book.title}</td>
-            <td>{book.author}</td>
-            <td>{book.genre}</td>
-            <td>{book.publicationDate}</td>
-            <td><Link to={`/book-details/${book._id}`}>Details</Link></td>
-            <td><Link to="/add-book">ADD NEW BOOK</Link></td>
-          </tr>
-          </tbody>))}
+      {filteredBooks?.map((book:IBook)=> (<BookCard  key = {book._id} book={book}/>))}
       
        
        

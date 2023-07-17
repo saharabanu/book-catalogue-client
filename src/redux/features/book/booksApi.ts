@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
+import { BookData, IBook, ReadData } from "../../../types/globalTypes";
 import { api } from "../../api/apiSlice";
 
 
@@ -65,8 +66,49 @@ const booksApi = api.injectEndpoints({
             query: (id) => `/books/comment/${id}`,
             providesTags: ["reviews"],
           }),
+          // post wishlist
+          createWishlist: builder.mutation<BookData, Partial<BookData>>({
+            query: (bookData: IBook) => ({
+              url: "/books/wishlist",
+              method: "POST",
+              body: bookData,
+            }),
+            invalidatesTags: ["wishlist"],
+          }),
+         // create reading list
+          createReadingList: builder.mutation<ReadData, Partial<ReadData>>({
+            query: (bookData: IBook) => ({
+              url: "/books/reading-list",
+              method: "POST",
+              body: bookData,
+            }),
+            invalidatesTags: ["reading-list"],
+          }),
+          removeWishlist: builder.mutation<IBook | null, string>({
+            query: (bookId) => ({
+              url: `/books/wishlist/${bookId}`,
+              method: "DELETE",
+            }),
+            invalidatesTags: ["wishlist"],
+          }),
+          removeReadingList: builder.mutation<IBook | null, string>({
+            query: (bookId) => ({
+              url: `/books/reading-list/${bookId}`,
+              method: "DELETE",
+            }),
+            invalidatesTags: ["reading-list"],
+          }),
+      
+          getWishlist: builder.query({
+            query: () => "/books/wishlist",
+            providesTags: ["wishlist"],
+          }),
+          getReadingList: builder.query({
+            query: () => "/books/reading-list",
+            providesTags: ["reading-list"],
+          }),
     
       }),
 })
 
-export const {useAddBookMutation,useGetSingleBookQuery, useDeleteBookMutation, useEditBookMutation,useGetBooksQuery, usePostCommentMutation, useGetCommentQuery} = booksApi
+export const {useGetBooksQuery,useAddBookMutation,useGetSingleBookQuery, useDeleteBookMutation, useEditBookMutation, usePostCommentMutation, useGetCommentQuery, useCreateWishlistMutation, useCreateReadingListMutation,useRemoveWishlistMutation,useRemoveReadingListMutation,useGetWishlistQuery,useGetReadingListQuery} = booksApi
