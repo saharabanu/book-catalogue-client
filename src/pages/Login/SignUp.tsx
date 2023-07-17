@@ -5,6 +5,7 @@ import Header from "../../layouts/Header"
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { createUser } from "../../redux/features/user/userSlice";
+import { toast } from "react-toastify";
 
 interface IUser {
   email:string,
@@ -24,6 +25,7 @@ const onSubmit = (user:IUser) =>{
   //console.log(user)
   dispatch(createUser(user))
   .then(() => {
+    toast.success('User Create Successfully')
     navigate('/');
   })
   .catch((error) => {

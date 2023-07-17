@@ -7,3 +7,10 @@ export type IBook = {
     reviews: string[] |[],
     status?:boolean
     };
+
+    export type FormValues = {
+        title: string;
+        author: string;
+        genre: string;
+        publicationDate: string;
+      };

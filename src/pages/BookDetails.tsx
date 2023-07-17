@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import Spinner from 'react-bootstrap/Spinner'
-import { useDeleteBookMutation, useGetSingleBookQuery } from "../redux/features/book/booksApi";
+import { useDeleteBookMutation,  useGetSingleBookQuery } from "../redux/features/book/booksApi";
 import { Table, Toast } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
@@ -20,6 +21,7 @@ const BookDetails = () => {
   const {data, isLoading, isError} = useGetSingleBookQuery(id);
   
   const [deleteBook, response] = useDeleteBookMutation();
+
 
 
   const handleDelete = (_id: any) =>{
@@ -57,7 +59,7 @@ const BookDetails = () => {
             <td>{data?.data?.genre}</td>
             <td>{data?.data?.publicationDate}</td>
             <td><button onClick={()=>handleDelete(data?.data?._id)} type="button" className="btn btn-danger">Delete</button></td>
-            <td><button type="button" className="btn btn-warning">Edit</button></td>
+            <td><button type="button" className="btn btn-warning"><Link to={`/edit-book/${data?.data?._id}`}>Edit</Link></button></td>
             
             
 
@@ -65,7 +67,7 @@ const BookDetails = () => {
           </tr>
           </tbody>
       
-       
+       {/* {`/edit-book/${data?.data?._id}`} */}
         
         
         

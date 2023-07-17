@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../../redux/hooks"
 import { loginUser } from "../../redux/features/user/userSlice"
 
-
 interface ILoginUser {
   email:string,
   password:string
@@ -22,9 +21,10 @@ const Login = () => {
   
 const onSubmit = (user:ILoginUser) =>{
 
-  console.log(user)
+  //console.log(user)
   dispatch(loginUser(user))
   .then(() => {
+    //toast.success("LoggedIn Successfully")
     navigate('/');
   })
   .catch((error) => {
@@ -32,8 +32,7 @@ const onSubmit = (user:ILoginUser) =>{
   });
 
 }
-  // const { register, handleSubmit } = useForm<IFormInput>()
-  // const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data)
+  
   return (
     <>
     <Header/>

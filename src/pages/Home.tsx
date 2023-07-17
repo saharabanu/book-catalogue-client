@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
     <Books/>
-    <Footer/>
+    {/* <Footer/> */}
     </>
   )
 }
